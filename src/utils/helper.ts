@@ -13,24 +13,21 @@ export const getDatasets: IGetDatasets = ({ grossReturns, netReturns, invested }
   {
     data: grossReturns,
     label: "Gross Returns",
-    backgroundColor: "#f87171",
-    borderColor: "#dc2626",
+    backgroundColor: "#FF7F50",
     fill: 1,
   },
   {
     data: netReturns,
     label: "Net Returns",
     fill: 2,
-    backgroundColor: "#38bdf8",
-    borderColor: "#0284c7",
+    backgroundColor: "#007bff",
     pointHitRadius: 5
   },
   {
     data: invested,
     label: "Invested",
     fill: "origin",
-    backgroundColor: "rgb(134 239 172)",
-    borderColor: "rgb(34 197 94)",
+    backgroundColor: "#D3D3D3",
   },
 ];
 

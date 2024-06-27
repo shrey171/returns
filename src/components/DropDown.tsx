@@ -10,16 +10,15 @@ interface IProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 
 export const DropDown = forwardRef<HTMLSelectElement, IProps>(
   ({ array, name, error, className, label, ...props }, ref) => {
-    const labelClasses = twMerge(
-      "capitalize group-focus-within:text-green-500",
-      error && "text-error"
-    );
+
+    const labelClasses = twMerge("capitalize text-lg", error && "text-error");    
     const inputClasses = twMerge(
-      "border-2 bg-white outline-none capitalize rounded-lg w-full px-4 py-3 mt-1 transition-colors duration-200 focus:border-green-500 focus:text-green-500",
+      "border-2 bg-white outline-none capitalize rounded-lg w-full px-4 py-3 mt-1 transition-colors duration-200 focus:border-accent",
       error && "border-error text-error"
     );
+
     return (
-      <div className={twMerge("group text-zinc-700", className)}>
+      <div className={className}>
         <label className={labelClasses} htmlFor={name}>
           {label || name}
         </label>

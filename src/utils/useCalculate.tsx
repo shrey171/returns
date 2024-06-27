@@ -3,50 +3,42 @@ import { useState } from "react";
 import { ISchema } from "./schema";
 import { getDatasets, getReturns } from "./helper";
 
-interface IUseCalculate {
-  (): {
-    calculate: (schema: ISchema) => void;
-    values: {
-      netProfit: number;
-      invested: number;
-      grossProfit: number;
-      lostToInflation: number;
-    };
-    labels: string[];
-    datasets: ChartDataset<"line", (number | Point | null)[]>[];
-  };
+interface IValues {
+  netProfit: number;
+  invested: number;
+  grossProfit: number;
+  lostToInflation: number;
 }
 
-interface IDataValues {
+interface IDataState {
   invested: number[];
   grossReturns: number[];
   netReturns: number[];
 }
 
+interface IUseCalculate {
+  (): {
+    calculate: (schema: ISchema) => void;
+    values: IValues;
+    labels: string[];
+    datasets: ChartDataset<"line", (number | Point | null)[]>[];
+  };
+}
+
 export const useCalculate: IUseCalculate = () => {
-  const [data, setData] = useState<IDataValues>({
+  const initialData: IDataState = {
     invested: [],
     grossReturns: [],
     netReturns: [],
-  });
-  const [labels, setLabels] = useState<string[]>([]);
-
-  const finalIdx = data.netReturns.length - 1;
-  const values = {
+  };
+  const initialValues: IValues = {
     netProfit: 0,
     invested: 0,
     grossProfit: 0,
     lostToInflation: 0,
   };
-
-  if (finalIdx >= 0) {
-    values.netProfit = Math.trunc(Number(data.netReturns[finalIdx]));
-    values.invested = Math.trunc(Number(data.invested[finalIdx]));
-    values.grossProfit = Math.trunc(Number(data.grossReturns[finalIdx]));
-    values.lostToInflation = Math.trunc(
-      Number(values.grossProfit - values.netProfit)
-    );
-  }
+  const [data, setData] = useState<IDataState>(initialData);
+  const [labels, setLabels] = useState<string[]>([]);
 
   const calculate = ({
     rate,
@@ -59,12 +51,7 @@ export const useCalculate: IUseCalculate = () => {
     const frequency = mode === "annual" ? 1 : 12;
     const yearlyIncrement = increment * frequency;
     let investements = 0;
-    const results: IDataValues = {
-      invested: [],
-      grossReturns: [],
-      netReturns: [],
-    };
-
+    const results: IDataState = { ...initialData };
     for (let i = 1; i <= years; i++) {
       const newGross = getReturns(increment, rate, i, frequency);
       const newNet = getReturns(increment, rate - inflation, i, frequency);
@@ -80,5 +67,16 @@ export const useCalculate: IUseCalculate = () => {
   };
 
   const datasets = getDatasets(data);
+  const idx = data.netReturns.length - 1;
+  const values: IValues = { ...initialValues };
+  const setValue = (key: keyof typeof values, value: number) => {
+    values[key] = Math.trunc(value);
+  };
+
+  setValue("netProfit", data.netReturns[idx]);
+  setValue("invested", data.invested[idx]);
+  setValue("grossProfit", data.grossReturns[idx]);
+  setValue("lostToInflation", data.grossReturns[idx] - data.netReturns[idx]);
+
   return { calculate, values, labels, datasets };
 };

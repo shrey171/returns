@@ -4,18 +4,23 @@ export default {
   theme: {
     extend: {
       gridTemplateColumns: {
-        main: '400px 1fr',
-        amount: '2fr 100px'
+        main: "400px 1fr",
+        amount: "2fr 100px",
       },
       minWidth: {
-        'screen': '100vw',
+        screen: "100vw",
       },
       minHeight: {
-        'screen': '100vh',
+        screen: "100vh",
       },
       colors: {
-        'light': '#FAF9F6',
-        'error': '#D32F2F',
+        accent: "#007bff",
+        error: "#D32F2F",
+        gross: '#008080',
+        invested: '#B0B0B0',
+        light: "#FAF9F6",
+        net: "#4682B4",
+        "dark-gray": "#333333",
       },
     },
   },

@@ -8,18 +8,14 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export const TextInput = forwardRef<HTMLInputElement, IProps>(
   ({ className, name, label, error, ...props }, ref) => {
+    const labelClasses = twMerge("capitalize text-lg", error && "text-error");
     const inputClasses = twMerge(
-      "border-2 text-zinc-700 outline-none rounded-lg w-full mt-1 px-4 py-3 peer transition-colors duration-200 focus:border-green-400",
+      "border-2 outline-none rounded-lg w-full mt-1 px-4 py-3 transition-colors duration-200 focus:border-accent",
       error && "border-error text-error"
     );
 
-    const labelClasses = twMerge(
-      "capitalize text-zinc-800 group-focus-within:text-green-500",
-      error && "text-error"
-    );
-
     return (
-      <div className={twMerge("group", className)}>
+      <div className={className}>
         <label htmlFor={name} className={labelClasses}>
           {label || name}
         </label>
