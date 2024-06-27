@@ -18,11 +18,11 @@ function App() {
   const { netProfit, grossProfit, lostToInflation, invested } = values;
 
   return (
-    <main className="grid gap-24 min-h-screen w-10/12 mx-auto py-12 text-dark-gray lg:py-20 xl:gap-24 max-w-5xl">
-      <section className="flex flex-col gap-20 justify-center items-center lg:items-start lg:flex-row">
+    <main className="grid gap-24 min-h-screen w-10/12 mx-auto py-12 text-dark-gray lg:py-20 xl:gap-24 max-w-6xl">
+      <section className="flex flex-col gap-12 justify-between items-center lg:items-start lg:flex-row">
         <form
           onSubmit={handleSubmit(d => calculate(d))}
-          className="flex flex-col gap-8">
+          className="flex flex-col gap-8 font-semibold text-sm max-w-lg">
           <div className="flex flex-col gap-4 sm:flex-row">
             <TextInput
               {...register("increment", { valueAsNumber: true })}
@@ -56,30 +56,28 @@ function App() {
               className="col-span-2"
             />
           </div>
-          <button className="text-sm font-medium drop-shadow-md tracking-wide uppercase rounded-lg col-span-full py-4 md:py-6 w-full transition-all duration-500 bg-accent text-white hover:bg-[#0056b3]">
+          <button className="font-bold drop-shadow-md tracking-wide uppercase rounded-lg col-span-full py-4 md:py-6 w-full transition-all duration-500 bg-accent text-white hover:bg-[#0056b3]">
             Avada Kedavra
           </button>
         </form>
-        <div className="flex flex-col gap-3 w-full text-xl items-center lg:h-full">
+        <div className="flex flex-col gap-3 w-full items-center rounded-3xl max-w-lg lg:*:text-white lg:bg-accent lg:px-10 lg:py-8 lg:h-full">
           <Amount
             amount={invested}
             invested={invested}
             label="Invested"
-            className="text-invested"
             showRatio
           />
           <Amount
             amount={grossProfit}
             label="Gross"
             invested={invested}
-            className="text-gross"
             showRatio
           />
           <Amount
             amount={lostToInflation}
             label="Inflation"
             invested={invested}
-            className="text-red-600"
+            className="text-error"
             showRatio
           />
           <Amount
@@ -87,7 +85,7 @@ function App() {
             label="Net"
             invested={invested}
             showRatio
-            className="text-net mt-auto"
+            className="mt-auto border-t-2 pt-4 lg:border-t-1"
           />
         </div>
       </section>

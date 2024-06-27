@@ -10,7 +10,7 @@ export interface ISchema {
 
 export const Schema: ZodType<ISchema> = z.object({
   increment: z.number({ message: 'Invalid Value' }).max(1000000, { message: 'Max 1 Million' }),
-  inflation: z.number({ message: 'Invalid Value' }).min(0, { message: 'Min 0%' }).max(100, { message: 'Max 100%' }),
+  inflation: z.number({ message: 'Invalid Value' }).min(0, { message: 'Min 0%' }).max(20, { message: 'Max 30%' }),
   rate: z.number({ message: 'Invalid Value' }).min(1, { message: 'Min 1%' }).max(30, { message: 'Max 30%' }),
   years: z.number({ message: 'Invalid Value' }).min(2, { message: 'At least 2 years' }).max(50, { message: 'Max 50' }),
   mode: z.enum(['annual', 'monthly']),

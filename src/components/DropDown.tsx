@@ -11,7 +11,7 @@ interface IProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 export const DropDown = forwardRef<HTMLSelectElement, IProps>(
   ({ array, name, error, className, label, ...props }, ref) => {
 
-    const labelClasses = twMerge("capitalize text-lg", error && "text-error");    
+    const labelClasses = twMerge("capitalize", error && "text-error");    
     const inputClasses = twMerge(
       "border-2 bg-white outline-none capitalize rounded-lg w-full px-4 py-3 mt-1 transition-colors duration-200 focus:border-accent",
       error && "border-error text-error"

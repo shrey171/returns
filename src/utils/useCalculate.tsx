@@ -70,7 +70,7 @@ export const useCalculate: IUseCalculate = () => {
   const idx = data.netReturns.length - 1;
   const values: IValues = { ...initialValues };
   const setValue = (key: keyof typeof values, value: number) => {
-    values[key] = Math.trunc(value);
+    values[key] = value ? Math.trunc(value) : 0;
   };
 
   setValue("netProfit", data.netReturns[idx]);

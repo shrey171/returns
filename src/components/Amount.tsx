@@ -22,14 +22,14 @@ export const Amount = ({
   const percent = formatter(amount / invested || 0, 3);
   const formattedAmount = formatter(amount);
   const classes = twMerge(
-    "text-indigo-600 w-full flex justify-between text-lg sm:text-xl",
+    "w-full text-accent flex justify-between gap-4",
     className
   );
 
   return (
     <div className={classes}>
-      <p>{label}</p>
-      <div className="grid grid-cols-[1fr_100px] font-mono text-end md:gap-4">
+      <p className="font-medium uppercase">{label}</p>
+      <div className="grid grid-cols-[1fr_100px] font-mono text-end md:gap-4 lg:text-lg">
         <p>{formattedAmount}</p>
         <p className="lg:text-start">{showRatio ? `(${percent}x)` : ""}</p>
       </div>
